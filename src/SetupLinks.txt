@@ -1,3 +1,15 @@
 ///// Useful links for setting up environment and importing data /////
 http://docs.datastax.com/en/cql/3.1/cql/cql_reference/copy_r.html
 http://planetcassandra.org/blog/datastax-developer-blog-ways-to-move-data-tofrom-datastax-enterprise-and-cassandra/
+
+
+///// Example of creating CF and then importing data into it /////
+cqlsh:test> create table highways (highwayid int primary key, shortdirection text, direction text, highwayname text);
+cqlsh:test> copy highways (highwayid, shortdirection, direction, highwayname) from 'C:\Users\Kyle\Documents\GitHub\newpo
+rtfolio\Sping15\cs410-sp15\project\ProjectData-Cloud2015\highways.csv';
+Bad Request: line 1:108 no viable alternative at input ','
+Aborting import at record #0 (line 1). Previously-inserted values still present.
+0 rows imported in 0.017 seconds.
+cqlsh:test> copy highways (highwayid, shortdirection, direction, highwayname) from 'C:\Users\Kyle\Documents\GitHub\newpo
+rtfolio\Sping15\cs410-sp15\project\ProjectData-Cloud2015\highways.csv' with header = true;
+2 rows imported in 0.050 seconds.
