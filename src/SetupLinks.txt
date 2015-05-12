@@ -1,0 +1,3 @@
+///// Useful links for setting up environment and importing data /////
+http://docs.datastax.com/en/cql/3.1/cql/cql_reference/copy_r.html
+http://planetcassandra.org/blog/datastax-developer-blog-ways-to-move-data-tofrom-datastax-enterprise-and-cassandra/
