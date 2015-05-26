@@ -19,10 +19,8 @@ create table loopdata_by_detectorid (
 	occupancy int,
 	status int,
 	dqflags int,
-	primary key (detectorid, starttime, volume, status)
+	primary key (detectorid, starttime, volume, speed)
 );
-
-create index on loopdata_by_detectorid (speed);
 
 copy highways (highwayid, shortdirection, direction, highwayname) 
 from 'C:\Users\Kyle\Documents\GitHub\PDXCassandraDemo\src\data\highways.csv' 
