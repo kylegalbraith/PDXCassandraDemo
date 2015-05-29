@@ -13,3 +13,8 @@ Aborting import at record #0 (line 1). Previously-inserted values still present.
 cqlsh:test> copy highways (highwayid, shortdirection, direction, highwayname) from 'C:\Users\Kyle\Documents\GitHub\newpo
 rtfolio\Sping15\cs410-sp15\project\ProjectData-Cloud2015\highways.csv' with header = true;
 2 rows imported in 0.050 seconds.
+
+
+///// To load in the SSTables from data/data you need to run the sstableloader command as follows
+sstableloader -d 127.0.0.1 'C:\Users\Kyle Galbraith\Documents\GitHub\cassandra-bulkload-example\data\demo\loopdata
+_by_detectorid'
