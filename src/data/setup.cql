@@ -11,6 +11,8 @@ create table detector_for_stations (
 	detectorid int,
 	primary key (stationid, lanenumber)
 );
+
+
 create table loopdata_by_detectorid (
 	detectorid int,
 	starttime timestamp,
@@ -23,24 +25,3 @@ create table loopdata_by_detectorid (
 );
 
 create index on loopdata_by_detectorid (speed);
-
-copy highways (highwayid, shortdirection, direction, highwayname) 
-from 'C:\Users\Kyle\Documents\GitHub\PDXCassandraDemo\src\data\highways.csv' 
-with header = true;
-
-copy stations_northbound (stationid, milepost, locationtext, upstream, downstream, numberlanes, latlon, length)
-from 'C:\Users\Kyle\Documents\GitHub\PDXCassandraDemo\src\data\freeway_stations_northbound.csv' 
-with header = true;
-
-copy stations_southbound (stationid, milepost, locationtext, upstream, downstream, numberlanes, latlon, length)
-from 'C:\Users\Kyle\Documents\GitHub\PDXCassandraDemo\src\data\freeway_stations_southbound.csv' 
-with header = true;
-
-copy detector_for_stations (stationid, lanenumber, locationtext, detectorid)
-from 'C:\Users\Kyle\Documents\GitHub\PDXCassandraDemo\src\data\freeway_detectors_manip1.csv' 
-with header = true;
-
-copy loopdata_by_detectorid (detectorid, starttime, volume, speed, occupancy, status, dqflags)
-from 'C:\Users\Kyle\Documents\GitHub\newportfolio\Sping15\cs410-sp15\project\ProjectData-Cloud2015\freeway_loopdata_clean.csv' 
-with header = true;
-
