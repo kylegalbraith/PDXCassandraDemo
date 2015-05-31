@@ -51,9 +51,11 @@
     <Compile Include="CsvLoader.cs" />
     <Compile Include="LoopdataRepo.cs" />
     <Compile Include="HighwayRepo.cs" />
+    <Compile Include="PeakPeriodTravelTimesQuery.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DetectorRepo.cs" />
+    <Compile Include="StationVolumeQuery.cs" />
     <Compile Include="StationsSbRepo.cs" />
     <Compile Include="StationsNbRepo.cs" />
   </ItemGroup>

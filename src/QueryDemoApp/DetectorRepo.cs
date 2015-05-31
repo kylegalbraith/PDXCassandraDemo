@@ -26,7 +26,7 @@ namespace QueryDemoApp
                 return 0;
             }
             //detectorid,highwayid,milepost,locationtext,detectorclass,lanenumber,stationid
-            var loader = new CsvLoader(_session, path, @"insert into detector_for_stations (stationid, lanenumber,	locationtext, detectorid) values ({6},{5},'{3}',{0})");
+            var loader = new CsvLoader(_session, path, @"insert into detector_for_stations (stationid, lanenumber,	locationtext, detectorid) values ({0},{1},'{2}',{3})");
 
             return loader.Load();
         }

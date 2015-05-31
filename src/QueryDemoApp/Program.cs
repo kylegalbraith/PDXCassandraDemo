@@ -43,11 +43,13 @@ namespace QueryDemoApp
             if (count > 0)
                 Console.WriteLine("Loaded {0} detectors", count);
 
-            var loopRepo = new LoopdataRepo(session);
-            count = loopRepo.LoadFromCsv(@"../../../data/freeway_loopdata_clean.csv");
 
-            if (count > 0)
-                Console.WriteLine("Loaded {0} detectors", count);
+
+            QueryTwo(session);
+
+            QueryFour(session);
+
+            QueryFive(session);
 
 
             Console.WriteLine("Done");
@@ -57,13 +59,61 @@ namespace QueryDemoApp
 
         static void QueryOne() { }
 
-        static void QueryTwo() { }
+        static void QueryTwo(ISession session) {
+            var query = new StationVolumeQuery(session);
+
+            DateTime startDate = new DateTime(2011, 9, 21);
+            DateTime endDate = new DateTime(2011, 9, 22);
+
+            //Temp code (Data is off)
+
+            startDate = startDate.AddDays(-15).AddMonths(-8);
+            endDate = endDate.AddDays(-15).AddMonths(-8);
+
+            long result = query.Run("Foster NB", startDate, endDate);
+
+            Console.WriteLine("Query 2 result: {0}", result);
+        }
 
         static void QueryThree() { }
 
-        static void QueryFour() { }
+        static void QueryFour(ISession session) {
+            DateTime date = new DateTime(2011, 9, 22);
 
-        static void QueryFive() { }
+            //temp code
+            date = date.AddDays(-15).AddMonths(-8);
+
+            int[] results = GetPeakTravelTimes(date, "Foster NB", session);
+
+            Console.WriteLine("Travel times for Foster NB are {0} and {1} seconds", results[0], results[1]);
+        }
+
+        static void QueryFive(ISession session)
+        {
+            DateTime date = new DateTime(2011, 9, 22);
+
+            //temp code
+            date = date.AddDays(-15).AddMonths(-8);
+
+            int[] results = GetPeakTravelTimes(date, "Foster NB", session);
+
+            Console.WriteLine("Travel times for Foster NB are {0:##0.00} and {1:##0.00} minutes", results[0] / 60M, results[1] / 60M);
+        }
+
+        private static int[] GetPeakTravelTimes(DateTime date, String stationName, ISession session) {
+            var query = new TravelTimesQuery(session);
+
+            DateTime morningStart = date.Date.AddHours(7);
+            DateTime eveningStart = date.Date.AddHours(16);
+
+            //Temp code (Data is off)
+
+            int morningTimes = query.Run(stationName, morningStart, morningStart.AddHours(2));
+            int eveningTimes = query.Run(stationName, eveningStart, eveningStart.AddHours(2));
+
+            return new int[] {morningTimes, eveningTimes};
+        }
+
 
         static void QuerySix() { }
     }

@@ -25,7 +25,8 @@ namespace QueryDemoApp
             {
                 return 0;
             }
-            //detectorid,starttime,volume,speed,occupancy,status,dqflags
+            //detectorid,starttime,volume,speed,occupancy,status,dqflags
+
             var loader = new CsvLoader(_session, path, @"insert into loopdata_by_detectorid (detectorid, starttime, volume,	speed, occupancy, status, dqflags) values ({0},'{1}',{2},{3},{4},{5},{6})");
 
             return loader.Load();
