@@ -57,14 +57,12 @@ namespace QueryDemoApp
             Console.ReadKey();
         }
 
-        static void QueryOne(ISession session) 
+        static void QueryOne(ISession session)
         {
 
             /* Expect 3284 records to come back with speed > 100 because the naive implementation
              * comes back with 3284 records, so if the range is 101 - 150 then 3284 records come 
              * back in 2 second rather than 11 minutes */
-            //Stopwatch timer = new Stopwatch();
-            //timer.Start();
             int overHundredCount = 0;
             for (int i = 101; i < 150; i++)
             {
@@ -75,12 +73,11 @@ namespace QueryDemoApp
                     overHundredCount++;
                 }
             }
-            //timer.Stop();
             Console.WriteLine("Number of results with speed > 100: {0}", overHundredCount);
-            //Console.WriteLine("Query 1 took {0} to execute", timer.Elapsed);
         }
 
-        static void QueryTwo(ISession session) {
+        static void QueryTwo(ISession session)
+        {
             var query = new StationVolumeQuery(session);
 
             DateTime startDate = new DateTime(2011, 9, 21);
@@ -98,7 +95,8 @@ namespace QueryDemoApp
 
         static void QueryThree() { }
 
-        static void QueryFour(ISession session) {
+        static void QueryFour(ISession session)
+        {
             DateTime date = new DateTime(2011, 9, 22);
 
             //temp code
@@ -121,7 +119,8 @@ namespace QueryDemoApp
             Console.WriteLine("Travel times for Foster NB are {0:##0.00} and {1:##0.00} minutes", results[0] / 60M, results[1] / 60M);
         }
 
-        private static int[] GetPeakTravelTimes(DateTime date, String stationName, ISession session) {
+        private static int[] GetPeakTravelTimes(DateTime date, String stationName, ISession session)
+        {
             var query = new TravelTimesQuery(session);
 
             DateTime morningStart = date.Date.AddHours(7);
@@ -132,7 +131,7 @@ namespace QueryDemoApp
             int morningTimes = query.Run(stationName, morningStart, morningStart.AddHours(2));
             int eveningTimes = query.Run(stationName, eveningStart, eveningStart.AddHours(2));
 
-            return new int[] {morningTimes, eveningTimes};
+            return new int[] { morningTimes, eveningTimes };
         }
 
 
