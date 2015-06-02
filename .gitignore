@@ -195,3 +195,7 @@ FakesAssemblies/
 # Visual Studio 6 workspace options file
 *.opt
 /src/data/freeway_loopdata_clean.csv
+src/data/freeway_detectors_manip1.csv
+src/data/freeway_stations_northbound.csv
+src/data/freeway_stations_southbound.csv
+src/data/highways.csv

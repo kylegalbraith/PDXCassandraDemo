@@ -16,5 +16,4 @@ rtfolio\Sping15\cs410-sp15\project\ProjectData-Cloud2015\highways.csv' with head
 
 
 ///// To load in the SSTables from data/data you need to run the sstableloader command as follows
-sstableloader -d 127.0.0.1 'C:\Users\Kyle Galbraith\Documents\GitHub\cassandra-bulkload-example\data\demo\loopdata
-_by_detectorid'
+sstableloader -d 127.0.0.1 'C:\Users\Kyle Galbraith\Documents\GitHub\cassandra-bulkload-example\data\demo\loopdata_by_detectorid'
