@@ -67,8 +67,8 @@ namespace QueryDemoApp
         static void QueryOne(ISession session)
         {
 
-            /* Expect 3284 records to come back with speed > 100 because the naive implementation
-             * comes back with 3284 records, so if the range is 101 - 150 then 3284 records come 
+            /* Expect 6972 records to come back with speed > 100 because the naive implementation
+             * comes back with 6972 records, so if the range is 101 - 150 then 6972 records come 
              * back in 2 second rather than 11 minutes */
             int overHundredCount = 0;
             for (int i = 101; i < 150; i++)
