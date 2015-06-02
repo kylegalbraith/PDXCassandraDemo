@@ -51,12 +51,20 @@ namespace QueryDemoApp
             QueryTwo(session);
             Console.WriteLine("-------------------------------------------");
 
+            Console.WriteLine("---------------- QUERY THREE ----------------");
+            //QueryFour(session);
+            Console.WriteLine("-------------------------------------------");
+
             Console.WriteLine("---------------- QUERY FOUR ----------------");
             QueryFour(session);
             Console.WriteLine("-------------------------------------------");
 
             Console.WriteLine("---------------- QUERY FIVE ----------------");
             QueryFive(session);
+            Console.WriteLine("-------------------------------------------");
+
+            Console.WriteLine("---------------- QUERY SIX ----------------");
+            //QueryFour(session);
             Console.WriteLine("-------------------------------------------");
 
             Console.WriteLine("Done");
