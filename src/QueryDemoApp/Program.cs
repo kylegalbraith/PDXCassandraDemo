@@ -43,14 +43,21 @@ namespace QueryDemoApp
             if (count > 0)
                 Console.WriteLine("Loaded {0} detectors", count);
 
+            Console.WriteLine("---------------- QUERY ONE ----------------");
             QueryOne(session);
+            Console.WriteLine("-------------------------------------------");
 
+            Console.WriteLine("---------------- QUERY TWO ----------------");
             QueryTwo(session);
+            Console.WriteLine("-------------------------------------------");
 
+            Console.WriteLine("---------------- QUERY FOUR ----------------");
             QueryFour(session);
+            Console.WriteLine("-------------------------------------------");
 
+            Console.WriteLine("---------------- QUERY FIVE ----------------");
             QueryFive(session);
-
+            Console.WriteLine("-------------------------------------------");
 
             Console.WriteLine("Done");
 
@@ -85,8 +92,8 @@ namespace QueryDemoApp
 
             //Temp code (Data is off)
 
-            startDate = startDate.AddDays(-15).AddMonths(-8);
-            endDate = endDate.AddDays(-15).AddMonths(-8);
+            //startDate = startDate.AddDays(-15).AddMonths(-8);
+            //endDate = endDate.AddDays(-15).AddMonths(-8);
 
             long result = query.Run("Foster NB", startDate, endDate);
 
@@ -100,7 +107,7 @@ namespace QueryDemoApp
             DateTime date = new DateTime(2011, 9, 22);
 
             //temp code
-            date = date.AddDays(-15).AddMonths(-8);
+            //date = date.AddDays(-15).AddMonths(-8);
 
             int[] results = GetPeakTravelTimes(date, "Foster NB", session);
 
@@ -112,7 +119,7 @@ namespace QueryDemoApp
             DateTime date = new DateTime(2011, 9, 22);
 
             //temp code
-            date = date.AddDays(-15).AddMonths(-8);
+            //date = date.AddDays(-15).AddMonths(-8);
 
             int[] results = GetPeakTravelTimes(date, "Foster NB", session);
 

@@ -199,3 +199,4 @@ src/data/freeway_detectors_manip1.csv
 src/data/freeway_stations_northbound.csv
 src/data/freeway_stations_southbound.csv
 src/data/highways.csv
+src/data/freeway_detectors.csv
