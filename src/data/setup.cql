@@ -31,3 +31,5 @@ create table loopdata_by_detectorid (
 
 create index on loopdata_by_detectorid (speed);
 create index on loopdata_by_detectorid (occupancy);
+create index on stations_northbound (locationtext);
+create index on stations_southbound (locationtext);
