@@ -49,14 +49,9 @@ namespace QueryDemoApp
                 return 0;
             }
 
-            double totalTravelTime = 0;
+            double averageSpeed = data.Average(d => (double)d.Speed);
 
-            foreach (LoopData entry in data)
-            {
-                totalTravelTime += ((entry.Speed / stationLength) / 3600);
-            }
-
-            return totalTravelTime;
+            return (stationLength / averageSpeed) * 3600;
         }
 
         private List<List<LoopData>> GetIntervals(LoopData[] speeds, int interval)

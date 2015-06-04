@@ -200,7 +200,7 @@ namespace QueryDemoApp
             for (int interval = 0; interval < travelTimes.Count; interval++)
             {
                 Console.WriteLine(
-                    "The travel time at {0} on {1} was {2} seconds.",
+                    "Travel time at {0} on {1} was {2} seconds.",
                     when.AddMinutes(minuteInterval * interval),
                     stationName,
                     travelTimes[interval]
