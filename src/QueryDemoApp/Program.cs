@@ -2,6 +2,7 @@
 using Microsoft.VisualBasic.FileIO;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,40 +39,111 @@ namespace QueryDemoApp
 
 
             var detectorRepo = new DetectorRepo(session);
-            count = detectorRepo.LoadFromCsv(@"../../../data/freeway_detectors.csv");
+            count = detectorRepo.LoadFromCsv(@"../../../data/freeway_detectors_manip1.csv");
 
             if (count > 0)
                 Console.WriteLine("Loaded {0} detectors", count);
 
-            Console.WriteLine("---------------- QUERY ONE ----------------");
-            QueryOne(session);
-            Console.WriteLine("-------------------------------------------");
+//            Console.WriteLine("---------------- QUERY ONE ----------------");
+//            QueryOne(session);
+//            Console.WriteLine("-------------------------------------------");
+//
+//            Console.WriteLine("---------------- QUERY TWO ----------------");
+//            QueryTwo(session);
+//            Console.WriteLine("-------------------------------------------");
+//
+//            Console.WriteLine("---------------- QUERY THREE ----------------");
+//            //QueryFour(session);
+//            Console.WriteLine("-------------------------------------------");
+//
+//            Console.WriteLine("---------------- QUERY FOUR ----------------");
+//            QueryFour(session);
+//            Console.WriteLine("-------------------------------------------");
+//
+//            Console.WriteLine("---------------- QUERY FIVE ----------------");
+//            QueryFive(session);
+//            Console.WriteLine("-------------------------------------------");
+//
+//            Console.WriteLine("---------------- QUERY SIX ----------------");
+//            //QueryFour(session);
+//            Console.WriteLine("-------------------------------------------");
 
-            Console.WriteLine("---------------- QUERY TWO ----------------");
-            QueryTwo(session);
-            Console.WriteLine("-------------------------------------------");
-
-            Console.WriteLine("---------------- QUERY THREE ----------------");
-            //QueryFour(session);
-            Console.WriteLine("-------------------------------------------");
-
-            Console.WriteLine("---------------- QUERY FOUR ----------------");
-            QueryFour(session);
-            Console.WriteLine("-------------------------------------------");
-
-            Console.WriteLine("---------------- QUERY FIVE ----------------");
-            QueryFive(session);
-            Console.WriteLine("-------------------------------------------");
-
-            Console.WriteLine("---------------- QUERY SIX ----------------");
-            //QueryFour(session);
-            Console.WriteLine("-------------------------------------------");
+            for (int number = 1; number <= 6; number++)
+            {
+                Query(number, session);
+            }
 
             Console.WriteLine("Done");
-
             Console.ReadKey();
         }
 
+        delegate void QueryExecutor(ISession session);
+
+        static void Query(int number, ISession session)
+        {
+            QueryExecutor executor = null;
+
+            switch (number)
+            {
+                case 1:
+                    executor = QueryOne;
+                    break;
+
+                case 2:
+                    executor = QueryTwo;
+                    break;
+
+                case 3:
+                    executor = QueryThree;
+                    break;
+
+                case 4:
+                    executor = QueryFour;
+                    break;
+
+                case 5:
+                    executor = QueryFive;
+                    break;
+
+                case 6:
+                    executor = QuerySix;
+                    break;
+            }
+
+            if (executor == null)
+            {
+                throw new ArgumentException(string.Format("Unknown query number: {0}.", number), "number");
+            }
+
+            Console.WriteLine("---------------- QUERY {0} ----------------", number);
+            Console.WriteLine();
+
+            Stopwatch timer = Stopwatch.StartNew();
+
+            try
+            {
+                executor(session);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERROR: Query {0} terminated with a {1}.", number, ex.GetType().FullName);
+                Console.WriteLine("Exception Message: {0}", ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
+
+            timer.Stop();
+
+            Console.WriteLine();
+            Console.WriteLine("-------------------------------------------");
+            Console.WriteLine("Query {0} executed in {1}ms", number, timer.ElapsedMilliseconds);
+            Console.WriteLine("-------------------------------------------");
+            Console.WriteLine();
+        }
+
+        /// <summary>
+        /// Number of speeds > 100 in the data set
+        /// </summary>
+        /// <param name="session"></param>
         static void QueryOne(ISession session)
         {
 
@@ -91,6 +163,10 @@ namespace QueryDemoApp
             Console.WriteLine("Number of results with speed > 100: {0}", overHundredCount);
         }
 
+        /// <summary>
+        /// Find the total volume for the station Foster NB for Sept. 21, 2011
+        /// </summary>
+        /// <param name="session"></param>
         static void QueryTwo(ISession session)
         {
             var query = new StationVolumeQuery(session);
@@ -108,8 +184,34 @@ namespace QueryDemoApp
             Console.WriteLine("Query 2 result: {0}", result);
         }
 
-        static void QueryThree() { }
+        /// <summary>
+        /// Find travel time for station Foster NB for 5-minute intervals for Sept. 22, 2011. Report travel time in seconds.
+        /// </summary>
+        /// <param name="session"></param>
+        static void QueryThree(ISession session)
+        {
+            string stationName = @"Foster NB";
+            var query = new TravelTimesIntervalQuery(session, stationName);
 
+            DateTime when = new DateTime(2011, 9, 22);
+            int minuteInterval = 5;
+            List<double> travelTimes = query.Run(when, minuteInterval);
+
+            for (int interval = 0; interval < travelTimes.Count; interval++)
+            {
+                Console.WriteLine(
+                    "The travel time at {0} on {1} was {2} minutes.",
+                    when.AddMinutes(minuteInterval * interval),
+                    stationName,
+                    travelTimes[interval]
+                );
+            }
+        }
+
+        /// <summary>
+        /// Find the average travel time for 7-9AM and 4-6PM on September 22, 2011 for station Foster NB. Report travel time in seconds.
+        /// </summary>
+        /// <param name="session"></param>
         static void QueryFour(ISession session)
         {
             DateTime date = new DateTime(2011, 9, 22);
@@ -122,6 +224,10 @@ namespace QueryDemoApp
             Console.WriteLine("Travel times for Foster NB are {0} and {1} seconds", results[0], results[1]);
         }
 
+        /// <summary>
+        /// Find the average travel time for 7-9AM and 4-6PM on September 22, 2011 for station I-205 NB freeway. Report travel time in minutes.
+        /// </summary>
+        /// <param name="session"></param>
         static void QueryFive(ISession session)
         {
             DateTime date = new DateTime(2011, 9, 22);
@@ -149,7 +255,13 @@ namespace QueryDemoApp
             return new int[] { morningTimes, eveningTimes };
         }
 
-
-        static void QuerySix() { }
+        /// <summary>
+        /// Find a route from Johnson Creek to Columbia Blvd on I-205 NB using the upstream and downstream fields.
+        /// </summary>
+        /// <param name="session"></param>
+        static void QuerySix(ISession session)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
