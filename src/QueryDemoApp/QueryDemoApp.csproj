@@ -58,6 +58,7 @@
     <Compile Include="StationVolumeQuery.cs" />
     <Compile Include="StationsSbRepo.cs" />
     <Compile Include="StationsNbRepo.cs" />
+    <Compile Include="TravelTimesIntervalQuery.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
