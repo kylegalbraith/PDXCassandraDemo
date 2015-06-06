@@ -44,30 +44,6 @@ namespace QueryDemoApp
             if (count > 0)
                 Console.WriteLine("Loaded {0} detectors", count);
 
-//            Console.WriteLine("---------------- QUERY ONE ----------------");
-//            QueryOne(session);
-//            Console.WriteLine("-------------------------------------------");
-//
-//            Console.WriteLine("---------------- QUERY TWO ----------------");
-//            QueryTwo(session);
-//            Console.WriteLine("-------------------------------------------");
-//
-//            Console.WriteLine("---------------- QUERY THREE ----------------");
-//            //QueryFour(session);
-//            Console.WriteLine("-------------------------------------------");
-//
-//            Console.WriteLine("---------------- QUERY FOUR ----------------");
-//            QueryFour(session);
-//            Console.WriteLine("-------------------------------------------");
-//
-//            Console.WriteLine("---------------- QUERY FIVE ----------------");
-//            QueryFive(session);
-//            Console.WriteLine("-------------------------------------------");
-//
-//            Console.WriteLine("---------------- QUERY SIX ----------------");
-//            //QueryFour(session);
-//            Console.WriteLine("-------------------------------------------");
-
             for (int number = 1; number <= 6; number++)
             {
                 Query(number, session);
@@ -216,9 +192,6 @@ namespace QueryDemoApp
         {
             DateTime date = new DateTime(2011, 9, 22);
 
-            //temp code
-            //date = date.AddDays(-15).AddMonths(-8);
-
             int[] results = GetPeakTravelTimes(date, "Foster NB", session);
 
             Console.WriteLine("Travel times for Foster NB are {0} and {1} seconds", results[0], results[1]);
@@ -232,9 +205,6 @@ namespace QueryDemoApp
         {
             DateTime date = new DateTime(2011, 9, 22);
 
-            //temp code
-            //date = date.AddDays(-15).AddMonths(-8);
-
             int[] results = GetPeakTravelTimes(date, "Foster NB", session);
 
             Console.WriteLine("Travel times for Foster NB are {0:##0.00} and {1:##0.00} minutes", results[0] / 60M, results[1] / 60M);
@@ -246,8 +216,6 @@ namespace QueryDemoApp
 
             DateTime morningStart = date.Date.AddHours(7);
             DateTime eveningStart = date.Date.AddHours(16);
-
-            //Temp code (Data is off)
 
             int morningTimes = query.Run(stationName, morningStart, morningStart.AddHours(2));
             int eveningTimes = query.Run(stationName, eveningStart, eveningStart.AddHours(2));
