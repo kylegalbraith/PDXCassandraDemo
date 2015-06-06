@@ -261,7 +261,12 @@ namespace QueryDemoApp
         /// <param name="session"></param>
         static void QuerySix(ISession session)
         {
-            throw new NotImplementedException();
+            var query = new RouteFindingQuery(session);
+
+            string startPoint = "Johnson Cr NB";
+            string endPoint = "Columbia to I-205 NB";
+
+            query.run(startPoint, endPoint);
         }
     }
 }

@@ -55,6 +55,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DetectorRepo.cs" />
+    <Compile Include="RouteFindingQuery.cs" />
     <Compile Include="StationVolumeQuery.cs" />
     <Compile Include="StationsSbRepo.cs" />
     <Compile Include="StationsNbRepo.cs" />
