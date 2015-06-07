@@ -5,10 +5,6 @@ create table highways (highwayid int primary key, shortdirection text, direction
 create table stations_northbound (stationid int primary key, milepost float, locationtext text, upstream int, downstream int, numberlanes int, latlon text, length float);
 create table stations_southbound (stationid int primary key, milepost float, locationtext text, upstream int, downstream int, numberlanes int, latlon text, length float);
 
-create index on stations_northbound (locationtext);
-create index on stations_southbound (locationtext);
-
-
 create table detector_for_stations (
 	stationid int,
 	lanenumber int, 
