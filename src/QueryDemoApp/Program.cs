@@ -47,6 +47,8 @@ namespace QueryDemoApp
             for (int number = 1; number <= 6; number++)
             {
                 Query(number, session);
+                //pause to show the query result before moving to the next one
+                Console.ReadKey();
             }
 
             Console.WriteLine("Done");
